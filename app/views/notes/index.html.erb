@@ -1,0 +1,10 @@
+<h1>Your Yoga Notes</h1>
+
+<% @notes.each do |note| %>
+  <%= note.text %>
+<% end %>
+
+<%= form_for @note do |f| %>
+  <%= f.text_area :text %>
+  <%= f.submit %>
+<% end %>
