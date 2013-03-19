@@ -1,11 +1,10 @@
 <h1>Your Yoga Notes</h1>
 
-
 <ul class='notes'>
   <%= render @notes %>
 </ul>
 
-<%= form_for @note do |f| %>
+<%= form_for(@note, :remote => true) do |f| %>
   <%= f.text_area :text %>
   <%= f.submit %>
 <% end %>

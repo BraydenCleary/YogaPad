@@ -1,4 +1,5 @@
 class NotesController < ApplicationController
+  respond_to :js
 
   def index
     @note  = Note.new
@@ -6,10 +7,10 @@ class NotesController < ApplicationController
   end
 
   def create
-    note = Note.new(params[:note])
-    if note.save
+    @note = Note.new(params[:note])
+    if @note.save
       flash[:success] = 'Note successfully created!'
-      redirect_to notes_path
+      respond_with @note
     else
       render 'index'
     end
