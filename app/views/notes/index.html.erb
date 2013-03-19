@@ -1,8 +1,9 @@
 <h1>Your Yoga Notes</h1>
 
-<% @notes.each do |note| %>
-  <%= note.text %>
-<% end %>
+
+<ul class='notes'>
+  <%= render @notes %>
+</ul>
 
 <%= form_for @note do |f| %>
   <%= f.text_area :text %>
