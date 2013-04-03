@@ -1,1 +1,1 @@
-<li><%= note.text %></li>
+<li><%= note.text %><%= link_to 'Remove', note_path(note), :method => :delete %></li>

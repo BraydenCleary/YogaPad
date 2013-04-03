@@ -3,17 +3,26 @@ class NotesController < ApplicationController
 
   def index
     @note  = Note.new
-    @notes = Note.all 
+    @notes = Note.all
   end
 
   def create
     @note = Note.new(params[:note])
     if @note.save
-      flash[:success] = 'Note successfully created!'
       respond_with @note
     else
-      render 'index'
+      render :index
     end
   end
-  
+
+  def destroy
+    note = Note.find(params[:id])
+    if note
+      note.destroy
+      render :json => { status: 'ok' }
+    else
+      render :json => { status: 'error'}
+    end
+  end
+
 end

@@ -9,6 +9,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<nav class='sign-actions'>
+    <span id='signin-toggle'>SignIn</span><%= render 'shared/signin' %>
+		<span id='signup-toggle'>SignUp</span><%= render 'shared/signup' %>
+	</nav>
+
   <% if flash[:success] %>
     <%= render 'application/success' %>
   <% end %>

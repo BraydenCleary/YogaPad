@@ -1,10 +1,14 @@
-<h1>Your Yoga Notes</h1>
+<h1>My Yoga Pad</h1>
 
 <ul class='notes'>
   <%= render @notes %>
 </ul>
 
-<%= form_for(@note, :remote => true) do |f| %>
-  <%= f.text_area :text %>
+<div class='form_toggle'>
+	<h3>Review a class?</h3>
+</div>
+
+<%= form_for(Note.new, :remote => true) do |f| %>
+  <%= f.text_area :text, placeholder: 'Write a reivew', :cols => 30, :rows => 7 %>
   <%= f.submit %>
 <% end %>
