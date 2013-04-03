@@ -1,4 +1,5 @@
 class YelpController < ApplicationController
+	respond_to :json
 
 	def index
 		consumer_key = '8ucfXv9o4bepqvDLD-COhA'
@@ -16,6 +17,8 @@ class YelpController < ApplicationController
 		master_hash = access_token.get(path)
 
 		@response = JSON.parse(master_hash.body)
+
+		render :partial => 'shared/yelp_response'
 	end
 
 end
