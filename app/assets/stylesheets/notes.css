@@ -3,14 +3,6 @@
   They will automatically be included in application.css.
 */
 
-.new_note {
-	display: none;
-}
-
-.form_toggle:hover {
-	color: blue;
-}
-
 .likeabutton {
 	margin-left: 1%;
   appearance: button;

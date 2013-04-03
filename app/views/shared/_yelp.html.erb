@@ -1,0 +1,5 @@
+<%= form_tag('/search') do %>
+	<%= text_field_tag :type, 'Yoga Studio' %>
+	<%= text_field_tag :zipcode, nil, :placeholder => ' Enter Zipcode' %>
+	<%= submit_tag('Search') %>
+<% end %>

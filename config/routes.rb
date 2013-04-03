@@ -4,4 +4,6 @@ YogaPad::Application.routes.draw do
   resources :notes
 
   resources :users, only: :create
+
+  get '/search' => 'yelp#index'
 end
