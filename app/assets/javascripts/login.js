@@ -12,13 +12,23 @@ var loginStatus = {
 
 	showSuccessfulSignout: function(){
 		this.reset();
-		this.element.find('.successful-signout').show().fadeOut(1500);
+		this.element.find('.successful-signout').show().fadeOut(2000);
 	},
 
 	showSuccessfulSignin: function(){
 		this.reset();
-		this.element.find('.successful-signin').show().fadeOut(1500);
+		this.element.find('.successful-signin').show().fadeOut(2000);
 	},
+
+	showSuccessfulSignup: function(){
+		this.reset();
+		this.element.find('.successful-signup').show().fadeOut(2000)
+	},
+
+	showSignupErrors: function(){
+		this.reset();
+		this.element.find('.signup-errors').show()
+	}
 }
 
 var login = {
@@ -89,10 +99,17 @@ $(document).ready(function(){
 			type: $(this).attr('method'),
 			data: $(this).serialize(),
 			success: function(response){
-				login.userSignedIn();
-				loginStatus.showSuccessfulSignin();
-				$('.new_user').find('.field').find('input').each(function(){ $(this).val('') }) //clear form inputs
-			}
+				if (response.failure){
+					$('.signup-errors').text(response.errors)
+					loginStatus.showSignupErrors();
+				}
+				else {
+					login.userSignedIn();
+					loginStatus.showSuccessfulSignup();
+					$('.new_user').find('.field').find('input').each(function(){ $(this).val('') }) //clear form inputs
+				}
+			},
+
 		})
 	});
 
