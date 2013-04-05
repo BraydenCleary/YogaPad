@@ -19,11 +19,6 @@ var loginStatus = {
 		this.reset();
 		this.element.find('.successful-signin').show().fadeOut(1500);
 	},
-
-	showStatus: function(status){
-		this.reset();
-		this.element.find(status).show();
-	}
 }
 
 var login = {
@@ -86,10 +81,38 @@ $(document).ready(function(){
 		});
 	})
 
-	$('.new_user').on('submit', function(event){
-		$(this).fadeOut('fast')
-		login.userSignedIn();
-	})
+	$('.new_user').on('submit', function(e){
+		e.stopPropagation();
+		e.preventDefault();
+		$.ajax({
+			url: $(this).attr('action'),
+			type: $(this).attr('method'),
+			data: $(this).serialize(),
+			success: function(response){
+				login.userSignedIn();
+				loginStatus.showSuccessfulSignin();
+				$('.new_user').find('.field').find('input').each(function(){ $(this).val('') }) //clear form inputs
+			}
+		})
+	});
+
+	$('.new_session').on('submit', function(e){
+		e.stopPropagation();
+		e.preventDefault();
+		$.ajax({
+			url: $(this).attr('action'),
+			type: $(this).attr('method'),
+			data: $(this).serialize(),
+			success: function(response){
+				login.userSignedIn();
+				loginStatus.showSuccessfulSignin();
+				$('.user').each(function(){
+					$(this).text(response.username)
+				});
+			}
+		});
+	});
+
 
 
 

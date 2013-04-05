@@ -1,5 +1,5 @@
 <div id="signin-form">
-  <%= form_for User.new, :remote => true do |f| %>
+  <%= form_for :session, :url => '/signin', :html => { :class => 'new_session'} do |f| %>
     <div class="field">
       <%= f.text_field :email, placeholder: "email", class: "small-form-field" %>
     </div>

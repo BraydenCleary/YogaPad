@@ -12,33 +12,9 @@
   <div class='current-user'>
     <%= current_user.nil? %>
   </div>
-  <div class='sign-status'>
-    <nav class='signed-in'>
-      Signed in user
-      <%= link_to 'Sign Out', signout_path, :class => 'sign-out' %>
-    </nav>
-  	<nav class='sign-actions'>
-  		<span id='signup-toggle'>SignUp</span><%= render 'shared/signup' %>
-  	</nav>
-  </div>
-  <nav class='yelp'>
-    <span id='yelp'>Find Yoga Studios</span><%= render 'shared/yelp' %>
-  </nav>
-  <div class='notices'>
-    <div class='successful-signout'>
-      Successfully signed out.
-    </div>
-    <div class='successful-signin'>
-      Welcome back, <span class='user'></span>!
-    </div>
-    <div class='sucessful-signup'>
-      Welcome to YogaPad, <span class='user'></span>!
-    </div>
-    <div class='signup-errors'>
-    </div>
-    <div class='signin-errors'>
-    </div>
-  </div>
+  <%= render 'shared/signin_out_nav' %>
+  <%= render 'shared/yelp_nav' %>
+  <%= render 'shared/notices' %>
 <%= yield %>
 
 </body>
