@@ -24,3 +24,7 @@
 #signin-form {
 	display: none;
 }
+
+.current-user{
+	display: none;
+}

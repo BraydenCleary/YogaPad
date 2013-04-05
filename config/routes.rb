@@ -5,5 +5,7 @@ YogaPad::Application.routes.draw do
 
   resources :users, only: :create
 
+  get '/signout' => 'sessions#destroy'
+
   get '/search' => 'yelp#index'
 end

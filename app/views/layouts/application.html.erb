@@ -9,22 +9,36 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if current_user %>
+  <div class='current-user'>
+    <%= current_user.nil? %>
+  </div>
+  <div class='sign-status'>
     <nav class='signed-in'>
-      <%= current_user.username %>
+      Signed in user
+      <%= link_to 'Sign Out', signout_path, :class => 'sign-out' %>
     </nav>
-  <% else %>
   	<nav class='sign-actions'>
-      <!-- <span id='signin-toggle'>SignIn</span><%= render 'shared/signin' %> -->
   		<span id='signup-toggle'>SignUp</span><%= render 'shared/signup' %>
   	</nav>
-  <% end %>
+  </div>
   <nav class='yelp'>
     <span id='yelp'>Find Yoga Studios</span><%= render 'shared/yelp' %>
   </nav>
-  <% if flash[:success] %>
-    <%= render 'application/success' %>
-  <% end %>
+  <div class='notices'>
+    <div class='successful-signout'>
+      Successfully signed out.
+    </div>
+    <div class='successful-signin'>
+      Welcome back, <span class='user'></span>!
+    </div>
+    <div class='sucessful-signup'>
+      Welcome to YogaPad, <span class='user'></span>!
+    </div>
+    <div class='signup-errors'>
+    </div>
+    <div class='signin-errors'>
+    </div>
+  </div>
 <%= yield %>
 
 </body>
