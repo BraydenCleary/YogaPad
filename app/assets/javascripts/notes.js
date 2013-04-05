@@ -7,7 +7,6 @@ $(document).ready(function(){
 		if ($(event.target).is("a[data-method='delete']")){
 			event.stopPropagation();
 			event.preventDefault();
-			debugger
 			var url = $(event.target).attr('href');
 			$(event.target).closest('li').hide();
 			$.ajax({
@@ -15,7 +14,6 @@ $(document).ready(function(){
 				type: 'POST',
 				data: { "_method":"delete"},
 				success: function(response){
-					debugger
 					console.log('Note deleted')
 				}
 			});
