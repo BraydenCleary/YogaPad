@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /^[\w+\-.]+@[a-z\d\-.]+\.[a-z]+$/i
-  attr_accessible :first_name, :last_name, :username, :email, :password, :password_confirmation
+  attr_accessible :username, :email, :password, :password_confirmation
 
   has_many :notes
 
@@ -15,8 +15,6 @@ class User < ActiveRecord::Base
             presence: true,
             format: {with: VALID_EMAIL_REGEX},
             uniqueness: {case_sensitive: false}
-
-  validates :first_name, :last_name, presence: true
 
   validates :password, presence: true, on: :create
 
@@ -33,8 +31,7 @@ class User < ActiveRecord::Base
   end
 
   def key_attrs
-    { first_name: self.first_name, last_name: self.last_name, 
-      username: self.username, email: self.email }
+    { username: self.username, email: self.email }
   end
 
 end

@@ -9,12 +9,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<nav class='sign-actions'>
-    <span id='signin-toggle'>SignIn</span><%= render 'shared/signin' %>
-		<span id='signup-toggle'>SignUp</span><%= render 'shared/signup' %>
+  <% if current_user %>
+    <nav class='signed-in'>
+      <%= current_user.username %>
+    </nav>
+  <% else %>
+  	<nav class='sign-actions'>
+      <!-- <span id='signin-toggle'>SignIn</span><%= render 'shared/signin' %> -->
+  		<span id='signup-toggle'>SignUp</span><%= render 'shared/signup' %>
+  	</nav>
+  <% end %>
+  <nav class='yelp'>
     <span id='yelp'>Find Yoga Studios</span><%= render 'shared/yelp' %>
-	</nav>
-
+  </nav>
   <% if flash[:success] %>
     <%= render 'application/success' %>
   <% end %>

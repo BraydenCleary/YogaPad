@@ -1,12 +1,7 @@
 <div id="signup-form">
-
   <%= form_for User.new, :remote => true do |f| %>
     <div class="field">
-      <%= f.text_field :first_name, placeholder: "First Name"%>
-    </div>
-
-    <div class="field">
-      <%= f.text_field :last_name, placeholder: "Last Name" %>
+      <%= f.text_field :username, placeholder: "Username" %>
     </div>
 
     <div class="field">

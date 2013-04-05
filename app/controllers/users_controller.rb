@@ -1,7 +1,8 @@
-class UsersController < ApplicationController 
-  
+class UsersController < ApplicationController
+
   def create
     @user = User.new(params[:user])
+    puts @user.inspect
     if @user.save
       sign_in @user
       render :json => @user.to_json
