@@ -3,6 +3,7 @@
 
 $(document).ready(function(){
 
+	//Delete notes
 	$(".notes").on('click', function(event){
 		if ($(event.target).is("a[data-method='delete']")){
 			event.stopPropagation();
@@ -19,5 +20,12 @@ $(document).ready(function(){
 			});
 		}
 	});
+
+	//Render notes
+	var notes = JSON.parse($('[data-notes]').text())
+	for (i in notes){
+		$('.notes').append("<li>" + notes[i].text + " " + notes[i].created_at + "</li>")
+	}
+
 });
 

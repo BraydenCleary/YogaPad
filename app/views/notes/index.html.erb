@@ -1,7 +1,10 @@
+<h1>My Notes:</h1>
 <ul class='notes'>
-	<h1>My Notes:</h1>
-  <%= render @notes %>
 </ul>
+
+<script data-notes type="text/json">
+	<%= @notes.to_json.gsub('/', '\\/').html_safe %>
+</script>
 
 <div class='form_toggle'>
 	<h3>Review a class?</h3>

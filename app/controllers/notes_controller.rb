@@ -3,7 +3,7 @@ class NotesController < ApplicationController
 
   def index
     @note  = Note.new
-    @notes = Note.all
+    @notes = Note.all.map { |note| note.attributes }
   end
 
   def create
