@@ -7,6 +7,9 @@
 	<%= @notes.to_json.gsub('/', '\\/').html_safe %>
 </script>
 
+<script data-yelp type='text/json'>
+</script>
+
 <div class='add-note'>
 	<h3>Review a class?</h3>
 
@@ -14,7 +17,6 @@
 	  <%= f.text_area :text, placeholder: 'Write a reivew', :cols => 30, :rows => 7 %>
 	  <%= f.submit %>
 	<% end %>
-</div>
 
 <ul class='yelp-results'>
 </ul>
