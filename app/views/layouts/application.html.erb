@@ -9,13 +9,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <span class='current-user'><%= current_user.nil? %></span>
   <nav class='top-nav'>
     <span class='title'>My YogaPad</span>
-    <%= render 'shared/signin_out_nav' %>
     <%= render 'shared/yelp_nav' %>
   </nav>
-  <%= render 'shared/notices' %>
 <%= yield %>
 
 </body>
