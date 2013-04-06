@@ -1,4 +1,4 @@
-<%= form_tag('/search', :method => 'get') do %>
+<%= form_tag('/search', :method => 'get', :class => 'yelp-search') do %>
 	<%= text_field_tag :type, 'Yoga Studio' %>
 	<%= text_field_tag :zipcode, nil, :placeholder => ' Enter Zipcode' %>
 	<%= submit_tag('Search') %>

@@ -13,17 +13,6 @@
  */
 
 
-.sign-actions{
-	float: right;
-}
-
-#signup-form {
-	display: none;
-}
-
-#signin-form {
-	display: none;
-}
 
 .current-user{
 	display: none;

@@ -1,15 +1,13 @@
-<div id="signin-form">
-  <%= form_for :session, :url => '/signin', :html => { :class => 'new_session'} do |f| %>
-    <div class="field">
-      <%= f.text_field :email, placeholder: "email", class: "small-form-field" %>
-    </div>
+<%= form_for :session, :url => '/signin', :html => { :class => 'new_session'} do |f| %>
+  <div class="field">
+    <%= f.text_field :email, placeholder: "email", class: "small-form-field" %>
+  </div>
 
-    <div class="field">
-      <%= f.password_field :password, placeholder: "password", class: "small-form-field" %>
-    </div>
+  <div class="field">
+    <%= f.password_field :password, placeholder: "password", class: "small-form-field" %>
+  </div>
 
-    <div class="actions">
-      <%= f.submit "Sign in" %>
-    </div>
-  <% end %>
-</div>
+  <div class="actions">
+    <%= f.submit "Sign in" %>
+  </div>
+<% end %>

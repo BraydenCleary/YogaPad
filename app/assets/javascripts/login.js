@@ -66,18 +66,6 @@ $(document).ready(function(){
 	loginStatus.init($('.notices'));
 	login.init($('.sign-status'), $('.current-user'));
 
-	$('#signup-toggle').on('click', function(){
-		$('#signup-form').slideToggle();
-	});
-
-	$('#signup-trigger').on('click', function(){
-		$('#signup-form').slideToggle();
-	});
-
-	$('#signin-toggle').on('click', function(){
-		$('#signin-form').slideToggle();
-	})
-
 	$('.sign-out').on('click', function(e){
 		e.stopPropagation();
 		e.preventDefault();

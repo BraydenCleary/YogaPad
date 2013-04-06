@@ -1,10 +1,16 @@
 <div class='sign-status'>
-  <nav class='signed-in'>
+  <div class='signed-in'>
     <span class='user'><% if current_user %><%= current_user.username %><% end %></span>
     <%= link_to 'Sign Out', signout_path, :class => 'sign-out' %>
-  </nav>
-	<nav class='sign-actions'>
-    <span id='signin-toggle'>SignIn</span><%= render 'shared/signin' %>
-		<span id='signup-toggle'>SignUp</span><%= render 'shared/signup' %>
-	</nav>
+  </div>
+	<div class='sign-actions'>
+    <span id='signin-toggle'>SignIn</span>
+    <div id="signin-form">
+    	<%= render 'shared/signin' %>
+    </div>
+		<span id='signup-toggle'>SignUp</span>
+		<div id='signup-form'>
+			<%= render 'shared/signup' %>
+		</div>
+	</div>
 </div>
