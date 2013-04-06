@@ -2,6 +2,7 @@ class NotesController < ApplicationController
   respond_to :js
 
   def index
+    @results ||= ''
     @note  = Note.new
     @notes = Note.all.map { |note| note.attributes }
   end

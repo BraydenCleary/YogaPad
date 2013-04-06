@@ -16,9 +16,8 @@ class YelpController < ApplicationController
 
 		master_hash = access_token.get(path)
 
-		@response = JSON.parse(master_hash.body)
-
-		render :partial => 'shared/yelp_response'
+		@results = JSON.parse(master_hash.body)
+		render :json => @results
 	end
 
 end
