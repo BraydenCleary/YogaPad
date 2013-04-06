@@ -11,9 +11,7 @@ function Result(search_result){
 	this.render = function(){
 		$('.yelp-results').append("<li>" + this.name + "</li>")
 	}
-
 }
-
 
 $(document).ready(function(){
 
@@ -26,8 +24,9 @@ $(document).ready(function(){
 			data: $(this).serialize(),
 			success: function(response){
 				var search_results = response.businesses
+				$('.yelp-results').text('');
 				for (var i in search_results){
-					var result = new Result(search_results[i])
+					var result = new Result(search_results[i]);
 					result.render();
 				}
 			}

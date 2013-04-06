@@ -1,4 +1,5 @@
-<h1>My Notes:</h1>
+<h1 class='notes-heading'>My Notes:</h1>
+
 <ul class='notes'>
 </ul>
 
@@ -6,14 +7,14 @@
 	<%= @notes.to_json.gsub('/', '\\/').html_safe %>
 </script>
 
-<div class='form_toggle'>
+<div class='add-note'>
 	<h3>Review a class?</h3>
-</div>
 
-<%= form_for(Note.new, :remote => true) do |f| %>
-  <%= f.text_area :text, placeholder: 'Write a reivew', :cols => 30, :rows => 7 %>
-  <%= f.submit %>
-<% end %>
+	<%= form_for(Note.new, :remote => true) do |f| %>
+	  <%= f.text_area :text, placeholder: 'Write a reivew', :cols => 30, :rows => 7 %>
+	  <%= f.submit %>
+	<% end %>
+</div>
 
 <ul class='yelp-results'>
 </ul>
