@@ -1,6 +1,18 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
+function noteView(note) {
+	this.id = note.id
+	this.text = note.text
+	this.created_at = new Date(note.created_at).toDateString()
+	this.delete_button = "<a href='/notes/" + this.id + "' " + "class='likeabutton' data-method='delete' rel='nofollow'>Remove</a></li>"
+
+	this.render = function() {
+		return ("<li>" + this.text + " " + this.created_at + this.delete_button + "</li>")
+	}
+}
+
+
 $(document).ready(function(){
 
 	//Delete notes
@@ -24,7 +36,8 @@ $(document).ready(function(){
 	//Render notes
 	var notes = JSON.parse($('[data-notes]').text())
 	for (i in notes){
-		$('.notes').append("<li>" + notes[i].text + " " + notes[i].created_at + "</li>")
+		note = new noteView(notes[i])
+		$('.notes').append(note.render())
 	}
 
 });
