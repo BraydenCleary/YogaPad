@@ -21,6 +21,23 @@ notesView = {
     $('.note-deleted').show().fadeOut(2000)
   },
 
+  deleteNote: function(event){
+    if ($(event.target).is("a[data-method='delete']")){
+      event.stopPropagation();
+      event.preventDefault();
+      var url = $(event.target).attr('href');
+      $(event.target).closest('li').hide();
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: { "_method":"delete"},
+        success: function(response){
+          notesView.showDeletedNotice();
+        }
+      });
+    }
+  },
+
   renderNotes: function(){
     for (i in this.notes){
       note = new noteView(this.notes[i], this.template.clone())
@@ -31,20 +48,7 @@ notesView = {
 
   listenForDelete: function(){
     $(".notes").on('click', function(event){
-      if ($(event.target).is("a[data-method='delete']")){
-        event.stopPropagation();
-        event.preventDefault();
-        var url = $(event.target).attr('href');
-        $(event.target).closest('li').hide();
-        $.ajax({
-          url: url,
-          type: 'POST',
-          data: { "_method":"delete"},
-          success: function(response){
-            notesView.showDeletedNotice();
-          }
-        });
-      }
+      notesView.deleteNote(event);
     });
   }
 }
