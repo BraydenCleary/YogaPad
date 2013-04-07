@@ -27,3 +27,7 @@
 .yelp-results {
 	float: left;
 }
+
+.invalid-zipcode {
+	display: none;
+}

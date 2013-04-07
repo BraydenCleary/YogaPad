@@ -16,6 +16,7 @@ function noteView(note) {
 $(document).ready(function(){
 
 	//Delete notes
+	//should be inside of notes new
 	$(".notes").on('click', function(event){
 		if ($(event.target).is("a[data-method='delete']")){
 			event.stopPropagation();
@@ -34,6 +35,7 @@ $(document).ready(function(){
 	});
 
 	//Render notes
+	//should be inside of notes view
 	var notes = JSON.parse($('[data-notes]').text())
 	for (i in notes){
 		note = new noteView(notes[i])

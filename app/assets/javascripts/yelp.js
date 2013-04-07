@@ -48,16 +48,24 @@ $(document).ready(function(){
 	$('.yelp-search').on('submit', function(event){
 		event.stopPropagation();
 		event.preventDefault();
-		$.ajax({
-			url: $(this).attr('action'),
-			type: $(this).attr('method'),
-			data: $(this).serialize(),
-			success: function(response){
-				var search_results = response.businesses
-				Results.init(search_results)
-				Results.renderResults();
-			}
-		});
+		var input = $("input[id='zipcode']").val()
+		if ($.isNumeric(input) && input.length == 5){
+			$.ajax({
+				url: $(this).attr('action'),
+				type: $(this).attr('method'),
+				data: $(this).serialize(),
+				success: function(response){
+					var search_results = response.businesses
+					Results.init(search_results)
+					Results.renderResults();
+				}
+			});
+		} else {
+			$('.invalid-zipcode').show();
+			$(document).one('click', function(){
+				$('.invalid-zipcode').hide();
+			});
+		}
 	});
 
 	$('ul').on('click', function(e){
