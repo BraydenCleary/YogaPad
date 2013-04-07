@@ -9,7 +9,16 @@ notesView = {
     this.template = $('.notes').children();
     this.setNotes();
     this.listenForDelete();
+    this.hideNotices();
     $('.notes').html('')
+  },
+
+  hideNotices: function(){
+    $('.notices').children().hide();
+  },
+
+  showDeletedNotice: function(){
+    $('.note-deleted').show().fadeOut(2000)
   },
 
   renderNotes: function(){
@@ -32,7 +41,7 @@ notesView = {
           type: 'POST',
           data: { "_method":"delete"},
           success: function(response){
-            console.log('Note deleted')
+            notesView.showDeletedNotice();
           }
         });
       }
