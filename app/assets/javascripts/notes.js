@@ -48,17 +48,22 @@ function noteView(note, template) {
   this.template = $(template);
 
   this.setBody = function(){
-    this.template.find('.note-body').text(this.text)
+    this.template.find('.note-body').text(this.text);
   }
 
   this.setHref = function(){
-    this.template.find('a').attr('href', '/notes/' + this.id)
+    this.template.find('a').attr('href', '/notes/' + this.id);
+  }
+
+  this.setDate = function(){
+    this.template.find('.note-date').text(this.created_at);
   }
 
   this.render2 = function(){
     this.setBody();
     this.setHref();
-    return (this.template)
+    this.setDate();
+    return (this.template);
   }
 }
 
