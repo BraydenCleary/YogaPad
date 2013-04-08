@@ -9,6 +9,7 @@ notesView = {
     this.template = $('.notes').children();
     this.setNotes();
     this.listenForDelete();
+    this.listenForCreate();
     this.hideNotices();
     $('.notes').html('')
   },
@@ -38,17 +39,41 @@ notesView = {
     }
   },
 
+  renderNote: function(note, template){
+    note = new noteView(note, template)
+    note.render();
+    $('.notes').append(note.template)
+  },
+
   renderNotes: function(){
     for (i in this.notes){
-      note = new noteView(this.notes[i], this.template.clone())
-      note.render();
-      $('.notes').append(note.template)
+      this.renderNote(this.notes[i], this.template.clone());
     }
   },
 
   listenForDelete: function(){
     $(".notes").on('click', function(event){
       notesView.deleteNote(event);
+    });
+  },
+
+  listenForCreate: function(){
+    $('.new_note').on('submit', function(event){
+      notesView.createNote(event)
+    });
+  },
+
+  createNote: function(event){
+    event.stopPropagation();
+    event.preventDefault();
+    $.ajax({
+      url: $(event.target).attr('action'),
+      type: $(event.target).attr('method'),
+      data: $(event.target).serialize(),
+      success: function(response){
+        notesView.renderNote(response, notesView.template.clone())
+        $('.new_note').find("textarea").val('')
+      }
     });
   }
 }
@@ -80,25 +105,8 @@ function noteView(note, template) {
   }
 }
 
-
 $(document).ready(function(){
   notesView.init();
   notesView.renderNotes();
-
-  $('.new_note').on('submit', function(event){
-    event.stopPropagation();
-    event.preventDefault();
-    $.ajax({
-      url: $(this).attr('action'),
-      type: $(this).attr('method'),
-      data: $(this).serialize(),
-      success: function(response){
-        note = new noteView(response, notesView.template)
-        note.render();
-        $('.notes').append(note.template)
-        $('.new_note').find("textarea").val('')
-      }
-    });
-  });
 });
 
