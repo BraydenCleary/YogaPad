@@ -57,3 +57,7 @@
 .notes li {
   list-style: none;
 }
+
+.searching {
+  display: none;
+}

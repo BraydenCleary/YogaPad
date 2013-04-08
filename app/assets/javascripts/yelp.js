@@ -34,8 +34,13 @@ var resultsView = {
 		}
 	},
 
+	displaySearching: function(){
+		$('.searching').show();
+	},
+
 	onYelpSearch: function(){
 		$('.yelp-search').on('submit', function(event){
+			resultsView.displaySearching();
 			event.stopPropagation();
 			event.preventDefault();
 			var input = $("input[id='zipcode']").val()
@@ -55,6 +60,7 @@ var resultsView = {
 	},
 
 	validSearch: function(response){
+		$('.searching').hide();
 		$('.yelp-search').find("input[name='zipcode']").val(''); //clear search box
 		$('.yelp-results').empty();
 		var search_results = response.businesses
@@ -63,6 +69,7 @@ var resultsView = {
 	},
 
 	invalidSearch: function(){
+		$('.searching').hide();
 		$('.invalid-zipcode').show();
 		$(document).one('click', function(){
 			$('.invalid-zipcode').hide();
