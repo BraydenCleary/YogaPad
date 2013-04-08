@@ -1,17 +1,18 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 notesView = {
-  setNotes: function(){
-    this.notes = JSON.parse($('[data-notes]').text())
-  },
-
   init: function(){
     this.template = $('.notes').children();
     this.setNotes();
+    this.hideNotices();
     this.listenForDelete();
     this.listenForCreate();
-    this.hideNotices();
+
     $('.notes').html('')
+  },
+
+  setNotes: function(){
+    this.notes = JSON.parse($('[data-notes]').text())
   },
 
   hideNotices: function(){
@@ -20,6 +21,12 @@ notesView = {
 
   showDeletedNotice: function(){
     $('.note-deleted').show().fadeOut(2000)
+  },
+
+  listenForDelete: function(){
+    $(".notes").on('click', function(event){
+      notesView.deleteNote(event);
+    });
   },
 
   deleteNote: function(event){
@@ -37,24 +44,6 @@ notesView = {
         }
       });
     }
-  },
-
-  renderNote: function(note, template){
-    note = new noteView(note, template)
-    note.render();
-    $('.notes').append(note.template)
-  },
-
-  renderNotes: function(){
-    for (i in this.notes){
-      this.renderNote(this.notes[i], this.template.clone());
-    }
-  },
-
-  listenForDelete: function(){
-    $(".notes").on('click', function(event){
-      notesView.deleteNote(event);
-    });
   },
 
   listenForCreate: function(){
@@ -75,7 +64,20 @@ notesView = {
         $('.new_note').find("textarea").val('')
       }
     });
+  },
+
+  renderNote: function(note, template){
+    note = new noteView(note, template)
+    note.render();
+    $('.notes').append(note.template)
+  },
+
+  renderNotes: function(){
+    for (i in this.notes){
+      this.renderNote(this.notes[i], this.template.clone());
+    }
   }
+
 }
 
 
