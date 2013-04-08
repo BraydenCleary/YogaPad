@@ -1,5 +1,0 @@
-<li>
-	<%= note.text %>
-	<span class='date'><%= note.created_at.strftime("%B %d, %Y") %></span>
-	<%= link_to 'Remove', note_path(note), :method => :delete, :class => 'likeabutton' %>
-</li>

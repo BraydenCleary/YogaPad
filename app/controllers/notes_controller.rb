@@ -10,7 +10,7 @@ class NotesController < ApplicationController
   def create
     @note = Note.new(params[:note])
     if @note.save
-      respond_with @note
+      render :json => @note.to_json
     else
       render :index
     end

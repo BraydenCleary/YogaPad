@@ -41,7 +41,7 @@ notesView = {
   renderNotes: function(){
     for (i in this.notes){
       note = new noteView(this.notes[i], this.template.clone())
-      note.render2();
+      note.render();
       $('.notes').append(note.template)
     }
   },
@@ -72,7 +72,7 @@ function noteView(note, template) {
     this.template.find('.note-date').text(this.created_at);
   }
 
-  this.render2 = function(){
+  this.render = function(){
     this.setBody();
     this.setHref();
     this.setDate();
@@ -84,5 +84,21 @@ function noteView(note, template) {
 $(document).ready(function(){
   notesView.init();
   notesView.renderNotes();
+
+  $('.new_note').on('submit', function(event){
+    event.stopPropagation();
+    event.preventDefault();
+    $.ajax({
+      url: $(this).attr('action'),
+      type: $(this).attr('method'),
+      data: $(this).serialize(),
+      success: function(response){
+        note = new noteView(response, notesView.template)
+        note.render();
+        $('.notes').append(note.template)
+        $('.new_note').find("textarea").val('')
+      }
+    });
+  });
 });
 
