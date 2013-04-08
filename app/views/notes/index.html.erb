@@ -1,32 +1,33 @@
-<h1 class='notes-heading'>My Notes:</h1>
+<div class='note-body'>
+	<h1 class='notes-heading'>My Notes:</h1>
 
-<div class='notices'>
-	<div class='note-deleted'>
-		Note successfully deleted.
+	<div class='notices'>
+		<div class='note-deleted'>
+			Note successfully deleted.
+		</div>
+		<div class='note-created'>
+			Note successfully created.
+		</div>
 	</div>
-	<div class='note-created'>
-		Note successfully created.
+
+	<ul class='notes'>
+		<li><span class='note-body'></span><span class='note-date'></span><a href='/notes/ID' class='likeabutton' data-method='delete' rel='nofollow'>Remove</a></li>
+	</ul>
+
+	<script data-notes type="text/json">
+		<%= @notes.to_json.gsub('/', '\\/').html_safe %>
+	</script>
+
+	<script data-yelp type='text/json'>
+	</script>
+
+	<div class='add-note'>
+		<%= form_for @note do |f| %>
+		  <%= f.text_area :text, placeholder: 'Write something down!', :cols => 30, :rows => 7 %>
+		  <%= f.submit %>
+		<% end %>
 	</div>
 </div>
-
-<ul class='notes'>
-	<li><span class='note-body'></span><span class='note-date'></span><a href='/notes/ID' class='likeabutton' data-method='delete' rel='nofollow'>Remove</a></li>
-</ul>
-
-<script data-notes type="text/json">
-	<%= @notes.to_json.gsub('/', '\\/').html_safe %>
-</script>
-
-<script data-yelp type='text/json'>
-</script>
-
-<div class='add-note'>
-	<h3>Review a class?</h3>
-
-	<%= form_for @note do |f| %>
-	  <%= f.text_area :text, placeholder: 'Write a reivew', :cols => 30, :rows => 7 %>
-	  <%= f.submit %>
-	<% end %>
 
 <span class='invalid-zipcode'>Invalid Zipcode</span>
 <ul class='yelp-results'>

@@ -16,18 +16,41 @@
 	float: left;
 }
 
-.notes {
-	float: left;
-}
-
-.add-note {
-	float: left;
-}
-
 .yelp-results {
 	float: left;
 }
 
 .invalid-zipcode {
 	display: none;
+}
+
+.note-created, .note-deleted{
+  color: green;
+}
+
+.more:hover{
+  background-color: #999;
+}
+
+.note-body{
+  width: 100%;
+}
+
+.notes-heading{
+  text-align: center;
+  width: 50%;
+  margin: 0 25%;
+}
+
+.add-note{
+  text-align: center;
+  width: 50%;
+  margin: 0 25%;
+}
+
+.notes {
+ text-align: center;
+ width: 50%;
+ margin: 0 25%;
+
 }

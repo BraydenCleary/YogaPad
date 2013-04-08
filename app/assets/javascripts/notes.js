@@ -23,6 +23,10 @@ notesView = {
     $('.note-deleted').show().fadeOut(2000)
   },
 
+  showCreateNotice: function(){
+    $('.note-created').show().fadeOut(2000)
+  },
+
   listenForDelete: function(){
     $(".notes").on('click', function(event){
       notesView.deleteNote(event);
@@ -62,6 +66,7 @@ notesView = {
       success: function(response){
         notesView.renderNote(response, notesView.template.clone())
         $('.new_note').find("textarea").val('')
+        notesView.showCreateNotice();
       }
     });
   },
@@ -77,7 +82,6 @@ notesView = {
       this.renderNote(this.notes[i], this.template.clone());
     }
   }
-
 }
 
 

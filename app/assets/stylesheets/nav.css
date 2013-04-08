@@ -1,5 +1,10 @@
 .yelp{
-	width: 10%;
 	float: right;
 	margin-right: 2%;
 }
+
+.top-nav{
+	height: 50px;
+	background-color: #ccc;
+}
+
