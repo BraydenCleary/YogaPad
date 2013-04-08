@@ -1,4 +1,4 @@
-var Results = {
+var resultsView = {
 	init: function(results){
 		this.results = this.splitResults(results, 3);
 	},
@@ -24,6 +24,62 @@ var Results = {
 			result.render();
 		}
 		this.displayMore();
+	},
+
+	checkValidSearch: function(input){
+		if ($.isNumeric(input) && input.length == 5){
+			return true;
+		} else {
+			return false;
+		}
+	},
+
+	onYelpSearch: function(){
+		$('.yelp-search').on('submit', function(event){
+			event.stopPropagation();
+			event.preventDefault();
+			var input = $("input[id='zipcode']").val()
+			if (resultsView.checkValidSearch(input)){
+				$.ajax({
+					url: $(this).attr('action'),
+					type: $(this).attr('method'),
+					data: $(this).serialize(),
+					success: function(response){
+						resultsView.validSearch(response);
+					}
+				});
+			} else {
+				resultsView.invalidSearch();
+			}
+		});
+	},
+
+	validSearch: function(response){
+		$('.yelp-search').find("input[name='zipcode']").val(''); //clear search box
+		$('.yelp-results').empty();
+		var search_results = response.businesses
+		resultsView.init(search_results)
+		resultsView.renderResults();
+	},
+
+	invalidSearch: function(){
+		$('.invalid-zipcode').show();
+		$(document).one('click', function(){
+			$('.invalid-zipcode').hide();
+		});
+	},
+
+	listenForMore: function(){
+		$('ul').on('click', function(event){
+			resultsView.renderMore(event);
+		})
+	},
+
+	renderMore: function(event){
+		if ($(event.target).attr('class') == 'more'){
+			$(event.target).hide();
+			resultsView.renderResults();
+		}
 	}
 
 }
@@ -44,35 +100,6 @@ function Result(search_result){
 }
 
 $(document).ready(function(){
-
-	$('.yelp-search').on('submit', function(event){
-		event.stopPropagation();
-		event.preventDefault();
-		var input = $("input[id='zipcode']").val()
-		if ($.isNumeric(input) && input.length == 5){
-			$.ajax({
-				url: $(this).attr('action'),
-				type: $(this).attr('method'),
-				data: $(this).serialize(),
-				success: function(response){
-					var search_results = response.businesses
-					Results.init(search_results)
-					Results.renderResults();
-				}
-			});
-		} else {
-			$('.invalid-zipcode').show();
-			$(document).one('click', function(){
-				$('.invalid-zipcode').hide();
-			});
-		}
-	});
-
-	$('ul').on('click', function(e){
-		if ($(e.target).attr('class') == 'more'){
-			$(e.target).hide();
-			Results.renderResults();
-		}
-	})
-
+	resultsView.onYelpSearch();
+	resultsView.listenForMore();
 });
