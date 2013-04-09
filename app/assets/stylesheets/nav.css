@@ -7,6 +7,15 @@ body {
 	margin-right: 2%;
 }
 
+#type{
+	border-radius:5px 5px 5px 5px;
+}
+
+#zipcode{
+	border-radius:5px 5px 5px 5px;
+}
+
+
 .top-nav{
 	height: 50px;
 	background-color: #ccc;
