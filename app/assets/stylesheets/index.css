@@ -95,3 +95,17 @@
   position: absolute;
   left: .67%;
 }
+
+#note_text {
+  width: 295px; /* 300px less the 5px of left padding*/
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+  font-size: 16px;
+  background-color:#ccc;
+  color:#333;
+  padding-left: 5px;
+  border: 1px solid #000;
+  border-radius:5px 5px 5px 5px;
+}
+
