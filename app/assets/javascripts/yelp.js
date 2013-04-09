@@ -35,7 +35,7 @@ var resultsView = {
 	},
 
 	displaySearching: function(){
-		$('.searching').show();
+		$('.yelp-notice').css('visibility', 'visible').text('Searching...')
 	},
 
 	onYelpSearch: function(){
@@ -64,7 +64,7 @@ var resultsView = {
 	},
 
 	validSearch: function(response){
-		$('.searching').hide();
+		$('.yelp-notice').css('visibility', 'hidden');
 		$('.yelp-search').find("input[name='zipcode']").val(''); //clear search box
 		$('.yelp-results').empty();
 		var search_results = response.businesses
@@ -74,8 +74,7 @@ var resultsView = {
 	},
 
 	invalidSearch: function(){
-		$('.searching').hide();
-		$('.invalid-zipcode').show();
+		$('.yelp-notice').text('Invalid Zipcode')
 		$(document).one('click', function(){
 			$('.invalid-zipcode').hide();
 		});

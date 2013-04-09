@@ -12,6 +12,14 @@
   display: inline-block; padding: 2px 8px;
 }
 
+.note-body {
+  margin-left: 1%;
+}
+
+.yelp-img {
+  margin-top: 1em;
+}
+
 .notes-heading {
 	float: left;
   margin: 0;
@@ -50,34 +58,45 @@
 .notes {
   float: left;
   clear: left;
-  width: 60%;
+  width: 50%;
 }
 
 .notes li {
   list-style: none;
+  width: 100%;
 }
 
 .searching {
   display: none;
 }
 
+
+
 .yelp-results {
   position: absolute;
   right: .67%;
   top: 60px;
   list-style: none;
-  background-color: #ccc;
+
 }
 
 .yelp-notices {
   position: absolute;
   right: .67%;
-  top: 42px;
+  top: 20px;
+}
+
+.yelp-notice{
+  visibility: hidden;
+  position: absolute;
+  right: .67%;
+  top: 30px;
 }
 
 .results-by {
   height: 20px;
   margin-top: 15px;
+  margin-bottom: 10px;
   display: none;
 }
 
@@ -98,7 +117,7 @@
 
 #note_text {
   width: 295px; /* 300px less the 5px of left padding*/
-  height: 30px;
+  height: 80px;
   line-height: 30px;
   vertical-align: middle;
   font-size: 16px;
