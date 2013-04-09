@@ -85,7 +85,6 @@ notesView = {
   }
 }
 
-
 function noteView(note, template) {
   this.id = note.id;
   this.text = note.text;

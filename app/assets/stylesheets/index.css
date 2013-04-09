@@ -14,6 +14,7 @@
 
 .notes-heading {
 	float: left;
+  margin: 0;
 }
 
 .yelp-results {
@@ -84,3 +85,13 @@
   font-size: .7em;
 }
 
+.notices {
+  height: 30px;
+}
+
+.note-action {
+  color: green;
+  height: 30px;
+  position: absolute;
+  left: .67%;
+}
