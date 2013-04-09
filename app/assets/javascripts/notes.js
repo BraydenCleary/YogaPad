@@ -73,7 +73,7 @@ notesView = {
   },
 
   renderNote: function(note, template){
-    note = new noteView(note, template)
+    var note = new noteView(note, template)
     note.render();
     $('.notes').append(note.template)
   },
