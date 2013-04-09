@@ -19,11 +19,17 @@ notesView = {
     $('.notices').children().hide();
   },
 
+  stopFadingOut: function(target){
+    $(target).stop(true,true);
+  },
+
   showDeletedNotice: function(){
+    notesView.stopFadingOut('.note-deleted');
     $('.note-deleted').show().fadeOut(2000)
   },
 
   showCreateNotice: function(){
+    notesView.stopFadingOut('.note-created');
     $('.note-created').show().fadeOut(2000)
   },
 
