@@ -104,9 +104,17 @@ function Result(search_result){
 	this.zipcode = 			 search_result.location.postal_code
 	this.ratingImage = 	 search_result.rating_img_url
 	this.businessImage = search_result.image_url
+	this.fallbackImage = "/assets/peace.jpeg"
+	this.url =           search_result.url
 
 	this.render = function(){
-		$('.yelp-results').append("<li>" + this.name + "</li>")
+		if (this.businessImage !== undefined) {
+			$('.yelp-results').append("<li><a href='" + this.url + "'><img src='" + this.businessImage + "' /><span>" + this.name + "</span></a></li>")
+		}
+		else {
+			$('.yelp-results').append("<li><a href='" + this.url + "'><img src='" + this.fallbackImage + "' /><span>" + this.name + "</span></a></li>")
+		}
+
 	}
 }
 
