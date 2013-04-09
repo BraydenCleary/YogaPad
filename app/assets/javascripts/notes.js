@@ -16,21 +16,16 @@ notesView = {
   },
 
   hideNotices: function(){
-    $('.notices').children().hide();
+    $('.notices').children().css('visibility', 'hidden')
   },
 
   stopFadingOut: function(target){
     $(target).stop(true,true);
   },
 
-  showDeletedNotice: function(){
-    notesView.stopFadingOut('.note-deleted');
-    $('.note-deleted').show().fadeOut(2000)
-  },
-
-  showCreateNotice: function(){
-    notesView.stopFadingOut('.note-created');
-    $('.note-created').show().fadeOut(2000)
+  showNotice: function(notice){
+    notesView.stopFadingOut('.note-action')
+    $('.note-action').css('visibility', 'visible').css('opacity',1).text(notice).fadeTo(2000,0,function(){})
   },
 
   listenForDelete: function(){
@@ -50,7 +45,7 @@ notesView = {
         type: 'POST',
         data: { "_method":"delete"},
         success: function(response){
-          notesView.showDeletedNotice();
+          notesView.showNotice('Note successfully deleted.');
         }
       });
     }
@@ -72,7 +67,7 @@ notesView = {
       success: function(response){
         notesView.renderNote(response, notesView.template.clone())
         $('.new_note').find("textarea").val('')
-        notesView.showCreateNotice();
+        notesView.showNotice('Note successfully created.');
       }
     });
   },
