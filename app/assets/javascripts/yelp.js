@@ -59,6 +59,10 @@ var resultsView = {
 		});
 	},
 
+	displayLogo: function(){
+		$('.results-by').show();
+	},
+
 	validSearch: function(response){
 		$('.searching').hide();
 		$('.yelp-search').find("input[name='zipcode']").val(''); //clear search box
@@ -66,6 +70,7 @@ var resultsView = {
 		var search_results = response.businesses
 		resultsView.init(search_results)
 		resultsView.renderResults();
+		resultsView.displayLogo();
 	},
 
 	invalidSearch: function(){

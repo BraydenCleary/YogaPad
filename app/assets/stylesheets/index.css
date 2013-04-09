@@ -37,21 +37,19 @@
 }
 
 .notes-heading{
-  text-align: center;
-  width: 50%;
-  margin: 0 25%;
+  float: left;
+  clear: left;
 }
 
 .add-note{
-  text-align: center;
-  width: 50%;
-  margin: 0 25%;
+  float: left;
+  clear: left;
 }
 
 .notes {
- text-align: center;
- width: 50%;
- margin: 0 25%;
+  float: left;
+  clear: left;
+  width: 60%;
 }
 
 .notes li {
@@ -61,3 +59,28 @@
 .searching {
   display: none;
 }
+
+.yelp-results {
+  position: absolute;
+  right: .67%;
+  top: 60px;
+  list-style: none;
+  background-color: #ccc;
+}
+
+.yelp-notices {
+  position: absolute;
+  right: .67%;
+  top: 42px;
+}
+
+.results-by {
+  height: 20px;
+  margin-top: 15px;
+  display: none;
+}
+
+.note-date {
+  font-size: .7em;
+}
+

@@ -1,6 +1,4 @@
 <div class='note-body'>
-	<h1 class='notes-heading'>My Class Notes:</h1>
-
 	<div class='notices'>
 		<div class='note-deleted'>
 			Note successfully deleted.
@@ -10,8 +8,10 @@
 		</div>
 	</div>
 
+	<h1 class='notes-heading'>My Class Notes:</h1>
+
 	<ul class='notes'>
-		<li><span class='note-body'></span><span class='note-date'></span><a href='/notes/ID' class='likeabutton' data-method='delete' rel='nofollow'>Remove</a></li>
+		<li><span class='note-body'></span> <span class='note-date'></span><a href='/notes/ID' class='likeabutton' data-method='delete' rel='nofollow'>Remove</a></li>
 	</ul>
 
 	<script data-notes type="text/json">
@@ -30,8 +30,14 @@
 </div>
 
 
+<div class='yelp-notices'>
+	<span class='invalid-zipcode'>Invalid Zipcode</span>
+	<span class='searching'>Searching...</span>
+	<div class='results-by'><span>Results by</span><%= image_tag 'yelp_logo.png', :height => 20, :class => 'yelp-img' %></div>
+</div>
 
-<span class='invalid-zipcode'>Invalid Zipcode</span>
-<span class='searching'>Searching...</span>
 <ul class='yelp-results'>
+
+
+
 </ul>
