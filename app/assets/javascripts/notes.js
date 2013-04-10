@@ -6,7 +6,6 @@ notesView = {
     this.noteViewTemplate = this.element.find('.note').remove();
     this.setNotes();
     this.listenForDelete();
-    this.listenForCreate();
   },
 
   setNotes: function(){
@@ -34,27 +33,6 @@ notesView = {
         }
       });
     }
-  },
-
-  listenForCreate: function(){
-    $('.new_note').on('submit', function(event){ //newNote view (should be it's own view) // don't use underscores in class names
-      notesView.createNote(event)
-    });
-  },
-
-  createNote: function(event){  //this would be part of the above view
-    event.stopPropagation();
-    event.preventDefault();
-    $.ajax({
-      url: $(event.target).attr('action'),
-      type: $(event.target).attr('method'),
-      data: $(event.target).serialize(),
-      success: function(response){
-        notesView.renderNote(response, notesView.noteViewTemplate);
-        $('.new_note').find("textarea").val('');
-        notesNoticesView.generateNotice('Note successfully created.');
-      }
-    });
   },
 
   renderNote: function(note, template){ //rename this to addnote
@@ -116,11 +94,46 @@ function noticeView(notice, template){
   this.notice  = this.element.text(notice)
 }
 
+notesNewView = {
+
+  init: function(){
+    this.listenForCreate();
+  },
+
+  listenForCreate: function(){
+    $('.new_note').on('submit', function(event){
+      notesNewView.createNote(event);
+    });
+  },
+
+  createNote: function(event){
+    event.stopPropagation();
+    event.preventDefault();
+    $.ajax({
+      url: $(event.target).attr('action'),
+      type: $(event.target).attr('method'),
+      data: $(event.target).serialize(),
+      success: function(response){
+        notesView.renderNote(response, notesView.noteViewTemplate);
+        $('.new_note').find("textarea").val('');
+        notesNoticesView.generateNotice('Note successfully created.');
+      }
+    });
+  }
+
+}
+
+function notesNew(){
+
+}
+
 
 $(document).ready(function(){
   notesView.init();
   notesView.renderNotes();
 
   notesNoticesView.init();
+
+  notesNewView.init();
 });
 
