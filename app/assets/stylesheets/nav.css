@@ -1,6 +1,11 @@
+html {
+  background-image: url('subtle_white_feathers.png');
+}
+
 body {
 	font-family: 'Bree Serif', serif;
 	margin: 0;
+
 }
 
 .yelp{
@@ -27,4 +32,10 @@ body {
 	margin-left: 1%;
 	margin-top: 7px;
 	font-size: 2em;
+}
+
+.meditation-img {
+	width: 40px;
+	float: left;
+	margin-left: 1%	;
 }
