@@ -29,7 +29,7 @@ notesView = {
         type: 'POST',
         data: { "_method":"delete"},
         success: function(response){
-          notesNoticesView.generateNotice('Note successfully deleted.');
+          notesNoticesView.displayNotice('Note successfully deleted.');
         }
       });
     }
@@ -84,13 +84,18 @@ notesNoticesView = {
     this.noticesViewTemplate = $(this.element).find('.note-action').remove()
   },
 
-  showNotice: function(notice){
-    this.element.html(notice)
-  },
-
   generateNotice: function(notice){
     notice = new noticeView(notice, this.noticesViewTemplate)
-    this.showNotice(notice.notice)
+    this.element.html(notice.notice)
+  },
+
+  displayNotice: function(notice){
+    this.generateNotice(notice)
+    this.fadeNotice();
+  },
+
+  fadeNotice: function(){
+    this.element.find('.note-action').fadeTo(2000, 0)
   }
 }
 
@@ -120,15 +125,10 @@ notesNewView = {
       data: $(event.target).serialize(),
       success: function(response){
         notesView.addNote(response, notesView.noteViewTemplate);
-        notesNoticesView.generateNotice('Note successfully created.');
+        notesNoticesView.displayNotice('Note successfully created.');
       }
     });
   }
-
-}
-
-function notesNew(){
-
 }
 
 
