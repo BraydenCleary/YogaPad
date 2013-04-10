@@ -1,7 +1,10 @@
 var resultsView = {
 	init: function(results){
-		this.results = this.splitResults(results, 3);
+		this.element = $('.yelp-results');
+		this.onYelpSearch();
+		this.listenForMore();
 	},
+
 	splitResults: function(source, groups) {
 		var grouped = [];
 		groupSize = Math.ceil(source.length/groups);
@@ -11,9 +14,10 @@ var resultsView = {
     }
     return grouped;
 	},
+
 	displayMore: function(){
 		if (this.results.length > 0){
-			$('.yelp-results').append("<span class='more'>MORE</span>")
+			this.element.append("<span class='more'>MORE</span>")
 		}
 	},
 
@@ -58,10 +62,14 @@ var resultsView = {
 	validSearch: function(response){
 		resultsNotices.validSearchNotice();
 		$('.yelp-search').find("input[name='zipcode']").val(''); //clear search box
-		$('.yelp-results').empty();
 		var search_results = response.businesses
-		resultsView.init(search_results)
-		resultsView.renderResults();
+		this.element.empty();
+		this.results = this.prepResults(search_results)
+		this.renderResults();
+	},
+
+	prepResults: function(results){
+		return this.splitResults(results, 3)
 	},
 
 	listenForMore: function(){
@@ -133,8 +141,6 @@ resultsNotices = {
 
 
 $(document).ready(function(){
-	resultsView.onYelpSearch();
-	resultsView.listenForMore();
-
+	resultsView.init([]);
 	resultsNotices.init();
 });
