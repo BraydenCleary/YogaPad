@@ -2,13 +2,12 @@
 // All this logic will automatically be available in application.js.
 notesView = {
   init: function(){
-    this.template = $('.notes').children();
+    this.element = $('.notes');
+    this.noteViewTemplate = this.element.find('.note').remove();
     this.setNotes();
     this.hideNotices();
     this.listenForDelete();
     this.listenForCreate();
-
-    $('.notes').html('')
   },
 
   setNotes: function(){
@@ -16,7 +15,7 @@ notesView = {
   },
 
   hideNotices: function(){
-    $('.notices').children().css('visibility', 'hidden')
+    $('.notices').children().css('visibility', 'hidden') //notices should have it's own view
   },
 
   stopFadingOut: function(target){
@@ -29,7 +28,7 @@ notesView = {
   },
 
   listenForDelete: function(){
-    $(".notes").on('click', function(event){
+    this.element.on('click', function(event){
       notesView.deleteNote(event);
     });
   },
@@ -52,12 +51,12 @@ notesView = {
   },
 
   listenForCreate: function(){
-    $('.new_note').on('submit', function(event){
+    $('.new_note').on('submit', function(event){ //newNote view (should be it's own view) // don't use underscores in class names
       notesView.createNote(event)
     });
   },
 
-  createNote: function(event){
+  createNote: function(event){  //this would be part of the above view
     event.stopPropagation();
     event.preventDefault();
     $.ajax({
@@ -65,22 +64,21 @@ notesView = {
       type: $(event.target).attr('method'),
       data: $(event.target).serialize(),
       success: function(response){
-        notesView.renderNote(response, notesView.template.clone())
+        notesView.renderNote(response, notesView.noteViewTemplate)
         $('.new_note').find("textarea").val('')
         notesView.showNotice('Note successfully created.');
       }
     });
   },
 
-  renderNote: function(note, template){
+  renderNote: function(note, template){ //rename this to addnote
     var note = new noteView(note, template)
-    note.render();
-    $('.notes').append(note.template)
+    this.element.append(note.render())
   },
 
   renderNotes: function(){
     for (i in this.notes){
-      this.renderNote(this.notes[i], this.template.clone());
+      this.renderNote(this.notes[i], this.noteViewTemplate);
     }
   }
 }
@@ -89,25 +87,25 @@ function noteView(note, template) {
   this.id = note.id;
   this.text = note.text;
   this.created_at = new Date(note.created_at).toDateString();
-  this.template = $(template);
+  this.element = $(template).clone();
 
   this.setBody = function(){
-    this.template.find('.note-body').text(this.text);
+    this.element.find('.note-body').text(this.text);
   }
 
   this.setHref = function(){
-    this.template.find('a').attr('href', '/notes/' + this.id);
+    this.element.find('a').attr('href', '/notes/' + this.id);
   }
 
   this.setDate = function(){
-    this.template.find('.note-date').text(this.created_at);
+    this.element.find('.note-date').text(this.created_at);
   }
 
   this.render = function(){
     this.setBody();
     this.setHref();
     this.setDate();
-    return (this.template);
+    return this.element;
   }
 }
 

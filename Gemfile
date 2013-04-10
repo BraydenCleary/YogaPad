@@ -9,6 +9,8 @@ gem 'sqlite3'
 
 gem 'jquery-rails'
 
+gem 'debugger'
+
 gem 'thin'
 
 gem 'bcrypt-ruby'
