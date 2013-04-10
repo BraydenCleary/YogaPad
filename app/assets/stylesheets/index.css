@@ -108,6 +108,7 @@
 
 .note-date {
   font-size: .7em;
+  color: #fff;
 }
 
 .notices {
@@ -144,5 +145,12 @@
 .yelp-error{
   color: red;
 }
+
+.note {
+  margin-top: 10px;
+  background-color: #ccc;
+  border-radius:5px 5px 5px 5px;
+}
+
 
 
