@@ -29,7 +29,7 @@ notesView = {
         type: 'POST',
         data: { "_method":"delete"},
         success: function(response){
-          notesNoticesView.displayNotice('Note successfully deleted.');
+          notesNoticesView.displaySuccessNotice('Note successfully deleted.');
         }
       });
     }
@@ -80,32 +80,37 @@ function noteView(note, template) {
 
 notesNoticesView = {
   init: function(){
-    this.element = $('.notices')
-    this.noticesViewTemplate = $(this.element).find('.note-action').remove()
+    this.element = $('.notices');
+    this.noticesViewTemplate = $(this.element).find('.note-action').remove();
   },
 
-  generateNotice: function(notice){
-    notice = new noticeView(notice, this.noticesViewTemplate)
-    this.element.html(notice.notice)
+  generateNotice: function(notice, css_class){
+    notice = new noticeView(notice, this.noticesViewTemplate, css_class);
+    this.element.html(notice.notice);
   },
 
-  displayNotice: function(notice){
-    this.generateNotice(notice)
+  displaySuccessNotice: function(notice){
+    this.generateNotice(notice, 'success');
+    this.fadeNotice();
+  },
+
+  displayErrorNotice: function(notice){
+    this.generateNotice(notice, 'error');
     this.fadeNotice();
   },
 
   fadeNotice: function(){
-    this.element.find('.note-action').fadeTo(2000, 0)
+    this.element.find('.note-action').fadeTo(2000, 0);
   }
 }
 
-function noticeView(notice, template){
+function noticeView(notice, template, css_class){
   this.element = $(template).clone();
-  this.notice  = this.element.text(notice)
+  this.css_class  = css_class
+  this.notice  = this.element.text(notice).addClass(this.css_class);
 }
 
 notesNewView = {
-
   init: function(){
     this.listenForCreate();
   },
@@ -125,7 +130,10 @@ notesNewView = {
       data: $(event.target).serialize(),
       success: function(response){
         notesView.addNote(response, notesView.noteViewTemplate);
-        notesNoticesView.displayNotice('Note successfully created.');
+        notesNoticesView.displaySuccessNotice('Note successfully created.');
+      },
+      error: function(request, textStatus, errorThrown){
+        notesNoticesView.displayErrorNotice(request.responseText)
       }
     });
   }

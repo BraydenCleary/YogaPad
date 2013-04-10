@@ -33,10 +33,6 @@
 	display: none;
 }
 
-.note-created, .note-deleted{
-  color: green;
-}
-
 .more:hover{
   background-color: #ccc;
 }
@@ -132,10 +128,17 @@
 }
 
 .note-action {
-  color: green;
   height: 30px;
   position: absolute;
   left: .67%;
+}
+
+.note-action.success {
+  color: green;
+}
+
+.note-action.error {
+  color: red;
 }
 
 #note_text {

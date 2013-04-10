@@ -1,5 +1,4 @@
 class NotesController < ApplicationController
-  respond_to :js
 
   def index
     @results ||= ''
@@ -12,7 +11,9 @@ class NotesController < ApplicationController
     if @note.save
       render :json => @note.to_json
     else
-      render :index
+      respond_to do |format|
+        format.js { render :text => @note.errors.full_messages.first, :status => 403}
+      end
     end
   end
 
