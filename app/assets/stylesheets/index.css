@@ -16,10 +16,6 @@
   margin-left: 1%;
 }
 
-.yelp-img {
-  margin-top: 1em;
-}
-
 .notes-heading {
 	float: left;
   margin: 0;
@@ -101,22 +97,13 @@
 
 .yelp-notices {
   position: absolute;
-  right: .67%;
-  top: 20px;
+  top: 50px;
+  right: 2%;
 }
 
-.yelp-notice{
-  visibility: hidden;
-  position: absolute;
-  right: .67%;
-  top: 30px;
-}
-
-.results-by {
+.yelp-success {
   height: 20px;
-  margin-top: 15px;
-  margin-bottom: 10px;
-  display: none;
+  margin-top: -10px;
 }
 
 .note-date {
@@ -152,6 +139,10 @@
   padding-left: 5px;
   border: 1px solid #000;
   border-radius:5px 5px 5px 5px;
+}
+
+.yelp-error{
+  color: red;
 }
 
 

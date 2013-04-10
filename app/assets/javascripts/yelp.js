@@ -34,13 +34,9 @@ var resultsView = {
 		}
 	},
 
-	displaySearching: function(){
-		$('.yelp-notice').css('visibility', 'visible').text('Searching...')
-	},
-
 	onYelpSearch: function(){
 		$('.yelp-search').on('submit', function(event){
-			resultsView.displaySearching();
+			resultsNotices.displaySearchStatusNotice();
 			event.stopPropagation();
 			event.preventDefault();
 			var input = $("input[id='zipcode']").val()
@@ -54,30 +50,18 @@ var resultsView = {
 					}
 				});
 			} else {
-				resultsView.invalidSearch();
+				resultsNotices.invalidSearchNotice();
 			}
 		});
 	},
 
-	displayLogo: function(){
-		$('.results-by').show();
-	},
-
 	validSearch: function(response){
-		$('.yelp-notice').css('visibility', 'hidden');
+		resultsNotices.validSearchNotice();
 		$('.yelp-search').find("input[name='zipcode']").val(''); //clear search box
 		$('.yelp-results').empty();
 		var search_results = response.businesses
 		resultsView.init(search_results)
 		resultsView.renderResults();
-		resultsView.displayLogo();
-	},
-
-	invalidSearch: function(){
-		$('.yelp-notice').text('Invalid Zipcode')
-		$(document).one('click', function(){
-			$('.invalid-zipcode').hide();
-		});
 	},
 
 	listenForMore: function(){
@@ -118,7 +102,39 @@ function Result(search_result){
 	}
 }
 
+resultsNotices = {
+	init: function(){
+		this.element = $('.yelp-notices')
+		this.errorTemplate = this.element.find('.yelp-error').remove();
+		this.searchStatusTemplate = this.element.find('.yelp-search-status').remove();
+		this.successTemplate = this.element.find('.yelp-success').remove();
+	},
+
+	generateErrorNotice: function(notice){
+		return this.errorTemplate.clone().text(notice);
+	},
+
+	invalidSearchNotice: function(){
+		this.element.html(this.generateErrorNotice('Invalid Zipcode'));
+	},
+
+	validSearchNotice: function(){
+		this.element.html(this.successTemplate);
+	},
+
+	generateStatusNotice: function(notice){
+		return this.searchStatusTemplate.clone().text(notice);
+	},
+
+	displaySearchStatusNotice: function(){
+		this.element.html(this.generateStatusNotice('Searching...'));
+	}
+}
+
+
 $(document).ready(function(){
 	resultsView.onYelpSearch();
 	resultsView.listenForMore();
+
+	resultsNotices.init();
 });
