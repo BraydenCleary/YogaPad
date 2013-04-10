@@ -5,26 +5,12 @@ notesView = {
     this.element = $('.notes');
     this.noteViewTemplate = this.element.find('.note').remove();
     this.setNotes();
-    this.hideNotices();
     this.listenForDelete();
     this.listenForCreate();
   },
 
   setNotes: function(){
     this.notes = JSON.parse($('[data-notes]').text())
-  },
-
-  hideNotices: function(){
-    $('.notices').children().css('visibility', 'hidden') //notices should have it's own view
-  },
-
-  stopFadingOut: function(target){
-    $(target).stop(true,true);
-  },
-
-  showNotice: function(notice){
-    notesView.stopFadingOut('.note-action')
-    $('.note-action').css('visibility', 'visible').css('opacity',1).text(notice).fadeTo(2000,0,function(){})
   },
 
   listenForDelete: function(){
@@ -44,7 +30,8 @@ notesView = {
         type: 'POST',
         data: { "_method":"delete"},
         success: function(response){
-          notesView.showNotice('Note successfully deleted.');
+          var notice = new noticeView('Note successfully deleted.', notesNoticesView.noticesViewTemplate )
+          notesNoticesView.showNotice(notice.notice);
         }
       });
     }
@@ -64,9 +51,10 @@ notesView = {
       type: $(event.target).attr('method'),
       data: $(event.target).serialize(),
       success: function(response){
-        notesView.renderNote(response, notesView.noteViewTemplate)
-        $('.new_note').find("textarea").val('')
-        notesView.showNotice('Note successfully created.');
+        notesView.renderNote(response, notesView.noteViewTemplate);
+        $('.new_note').find("textarea").val('');
+        var notice = new noticeView('Note successfully created.', notesNoticesView.noticesViewTemplate);
+        notesNoticesView.showNotice(notice.notice);
       }
     });
   },
@@ -109,8 +97,26 @@ function noteView(note, template) {
   }
 }
 
+notesNoticesView = {
+  init: function(){
+    this.element = $('.notices')
+    this.noticesViewTemplate = $(this.element).find('.note-action').remove()
+  },
+
+  showNotice: function(notice){
+    this.element.html(notice)
+  }
+}
+
+function noticeView(notice, template){
+  this.element = $(template).clone();
+  this.notice  = this.element.text(notice)
+}
+
 $(document).ready(function(){
   notesView.init();
   notesView.renderNotes();
+
+  notesNoticesView.init();
 });
 

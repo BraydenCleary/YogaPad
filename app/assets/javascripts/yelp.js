@@ -50,7 +50,6 @@ var resultsView = {
 					type: $(this).attr('method'),
 					data: $(this).serialize(),
 					success: function(response){
-						debugger
 						resultsView.validSearch(response);
 					}
 				});
