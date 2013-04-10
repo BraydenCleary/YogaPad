@@ -30,8 +30,7 @@ notesView = {
         type: 'POST',
         data: { "_method":"delete"},
         success: function(response){
-          var notice = new noticeView('Note successfully deleted.', notesNoticesView.noticesViewTemplate )
-          notesNoticesView.showNotice(notice.notice);
+          notesNoticesView.generateNotice('Note successfully deleted.');
         }
       });
     }
@@ -53,8 +52,7 @@ notesView = {
       success: function(response){
         notesView.renderNote(response, notesView.noteViewTemplate);
         $('.new_note').find("textarea").val('');
-        var notice = new noticeView('Note successfully created.', notesNoticesView.noticesViewTemplate);
-        notesNoticesView.showNotice(notice.notice);
+        notesNoticesView.generateNotice('Note successfully created.');
       }
     });
   },
@@ -105,6 +103,11 @@ notesNoticesView = {
 
   showNotice: function(notice){
     this.element.html(notice)
+  },
+
+  generateNotice: function(notice){
+    notice = new noticeView(notice, this.noticesViewTemplate)
+    this.showNotice(notice.notice)
   }
 }
 
@@ -112,6 +115,7 @@ function noticeView(notice, template){
   this.element = $(template).clone();
   this.notice  = this.element.text(notice)
 }
+
 
 $(document).ready(function(){
   notesView.init();
