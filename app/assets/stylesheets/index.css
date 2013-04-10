@@ -114,17 +114,17 @@
   height: 30px;
 }
 
-.note-action {
+.action {
   height: 30px;
   position: absolute;
   left: .67%;
 }
 
-.note-action.success {
+.action.success {
   color: green;
 }
 
-.note-action.error {
+.action.error {
   color: red;
 }
 

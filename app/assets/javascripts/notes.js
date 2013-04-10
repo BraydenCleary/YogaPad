@@ -1,15 +1,11 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 notesView = {
-  init: function(){
+  init: function(notes){
     this.element = $('.notes');
     this.noteViewTemplate = this.element.find('.note').remove();
-    this.setNotes();
+    this.notes = notes
     this.listenForDelete();
-  },
-
-  setNotes: function(){
-    this.notes = JSON.parse($('[data-notes]').text())
   },
 
   listenForDelete: function(){
@@ -29,20 +25,15 @@ notesView = {
         type: 'POST',
         data: { "_method":"delete"},
         success: function(response){
-          notesNoticesView.displaySuccessNotice('Note successfully deleted.');
+          noticesView.displaySuccessNotice('Note successfully deleted.');
         }
       });
     }
   },
 
-  clearInput: function(){
-    $('.new_note').find("textarea").val('');
-  },
-
   addNote: function(note, template){
     var note = new noteView(note, template)
     this.element.append(note.render())
-    this.clearInput();
   },
 
   renderNotes: function(){
@@ -78,10 +69,10 @@ function noteView(note, template) {
   }
 }
 
-notesNoticesView = {
+noticesView = {
   init: function(){
     this.element = $('.notices');
-    this.noticesViewTemplate = $(this.element).find('.note-action').remove();
+    this.noticesViewTemplate = $(this.element).find('.action').remove();
   },
 
   generateNotice: function(notice, css_class){
@@ -100,7 +91,7 @@ notesNoticesView = {
   },
 
   fadeNotice: function(){
-    this.element.find('.note-action').fadeTo(2000, 0);
+    this.element.find('.action').fadeTo(2000, 0);
   }
 }
 
@@ -112,6 +103,7 @@ function noticeView(notice, template, css_class){
 
 notesNewView = {
   init: function(){
+    this.element = $('.new_note')
     this.listenForCreate();
   },
 
@@ -130,21 +122,28 @@ notesNewView = {
       data: $(event.target).serialize(),
       success: function(response){
         notesView.addNote(response, notesView.noteViewTemplate);
-        notesNoticesView.displaySuccessNotice('Note successfully created.');
+        noticesView.displaySuccessNotice('Note successfully created.');
       },
       error: function(request, textStatus, errorThrown){
-        notesNoticesView.displayErrorNotice(request.responseText)
+        noticesView.displayErrorNotice(request.responseText)
       }
     });
-  }
+    notesNewView.clearInput();
+  },
+
+  clearInput: function(){
+    this.element.find("textarea").val('');
+  },
+
 }
 
 
 $(document).ready(function(){
-  notesView.init();
+  var notes = JSON.parse($('[data-notes]').text())
+  notesView.init(notes);
   notesView.renderNotes();
 
-  notesNoticesView.init();
+  noticesView.init();
 
   notesNewView.init();
 });
