@@ -35,14 +35,19 @@ notesView = {
     }
   },
 
-  renderNote: function(note, template){ //rename this to addnote
+  clearInput: function(){
+    $('.new_note').find("textarea").val('');
+  },
+
+  addNote: function(note, template){
     var note = new noteView(note, template)
     this.element.append(note.render())
+    this.clearInput();
   },
 
   renderNotes: function(){
     for (i in this.notes){
-      this.renderNote(this.notes[i], this.noteViewTemplate);
+      this.addNote(this.notes[i], this.noteViewTemplate);
     }
   }
 }
@@ -114,8 +119,7 @@ notesNewView = {
       type: $(event.target).attr('method'),
       data: $(event.target).serialize(),
       success: function(response){
-        notesView.renderNote(response, notesView.noteViewTemplate);
-        $('.new_note').find("textarea").val('');
+        notesView.addNote(response, notesView.noteViewTemplate);
         notesNoticesView.generateNotice('Note successfully created.');
       }
     });
